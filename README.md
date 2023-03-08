@@ -1,1 +1,4 @@
-MERN STACK
+<!-- run server -->
+
+cd .\server\
+ npm start
