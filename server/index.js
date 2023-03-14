@@ -2,12 +2,14 @@ import express from "express";
 import * as dotenv from "dotenv";
 import connectDB from "./mongodb/connect.js";
 import initRouter from "./routes/index.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 8080;
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
