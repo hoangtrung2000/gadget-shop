@@ -1,6 +1,7 @@
 import User from "../mongodb/models/user.js";
 import asyncHandler from "express-async-handler";
 import { generateRefreshToken, generateToken } from "../middlewares/jwt.js";
+import jwt from "jsonwebtoken";
 
 export const register = asyncHandler(async (req, res) => {
   const { email, password, firstname, lastname } = req.body;
@@ -60,4 +61,38 @@ export const getCurrent = asyncHandler(async (req, res) => {
       result: user ? user : "User not found",
     });
   }
+});
+
+export const refreshToken = asyncHandler(async (req, res) => {
+  const cookie = req.cookies;
+  if (!cookie && !cookie.refreshToken)
+    throw new Error("No refresh token in cookie!");
+  const decode = jwt.verify(cookie.refreshToken, process.env.JWT_SECRET);
+  // check whether the token matches the one is stored in database.
+  const user = await User.findOne({
+    _id: decode._id,
+    refreshToken: cookie.refreshToken,
+  });
+  return res.status(200).json({
+    success: user ? true : false,
+    newToken: user
+      ? generateToken(user._id, user.role)
+      : "Refresh token invalid",
+  });
+});
+
+export const logOut = asyncHandler(async (req, res) => {
+  const cookie = req.cookies;
+  if (!cookie && cookie.refreshToken)
+    throw new Error("No refresh token in cookie!");
+  await User.findOneAndUpdate(
+    { refreshToken: cookie.refreshToken },
+    { refreshToken: "" },
+    { new: true }
+  );
+  res.clearCookie("refreshToken", { httpOnly: true, secure: true });
+  return res.status(200).json({
+    success: true,
+    message: "Logout successfully!",
+  });
 });
