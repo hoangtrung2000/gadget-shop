@@ -1,7 +1,10 @@
-import User from "../mongodb/models/user.js";
 import asyncHandler from "express-async-handler";
-import { generateRefreshToken, generateToken } from "../middlewares/jwt.js";
 import jwt from "jsonwebtoken";
+import { generateRefreshToken, generateToken } from "../middlewares/jwt.js";
+import User from "../mongodb/models/user.js";
+import generateHtml from "../utils/generateHtml.js";
+import sendMail from "../utils/sendMail.js";
+import cryptoHash from "../utils/cryptoHash.js";
 
 export const register = asyncHandler(async (req, res) => {
   const { email, password, firstname, lastname } = req.body;
@@ -94,5 +97,43 @@ export const logOut = asyncHandler(async (req, res) => {
   return res.status(200).json({
     success: true,
     message: "Logout successfully!",
+  });
+});
+
+export const forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.query;
+  if (!email) throw new Error("Missing email");
+  const user = await User.findOne({ email });
+  if (!user) throw new Error("User not found");
+  const resetToken = user.createPasswordChangedToken();
+  await user.save();
+  const html = generateHtml(resetToken);
+  const data = {
+    email,
+    html,
+  };
+  const result = await sendMail(data);
+  return res.status(200).json({
+    success: true,
+    result,
+  });
+});
+
+export const resetPassword = asyncHandler(async (req, res) => {
+  const { token, password } = req.body;
+  const passwordResetToken = cryptoHash(token);
+  const user = await User.findOne({
+    passwordResetToken,
+    passwordResetExpires: { $gt: Date.now() },
+  });
+  if (!user) throw new Error("Invalid reset token");
+  user.password = password;
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+  user.passwordChangeAt = Date.now();
+  await user.save();
+  return res.status(200).json({
+    success: user ? true : false,
+    message: user ? "Password changed successfully" : "Something went wrong",
   });
 });
