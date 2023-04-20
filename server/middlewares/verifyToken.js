@@ -21,3 +21,14 @@ export const verifyToken = asyncHandler(async (req, res, next) => {
     });
   }
 });
+
+export const isAdmin = asyncHandler((req, res, next) => {
+  const { role } = req.user;
+  if (role !== "admin") {
+    return res.status(401).json({
+      success: false,
+      message: "Require administrator role",
+    });
+  }
+  next();
+});

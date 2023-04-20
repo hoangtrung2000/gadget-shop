@@ -37,11 +37,15 @@ export const login = asyncHandler(async (req, res) => {
   }
   const user = await User.findOne({ email }); // user is an instance of Mongoose
   if (user && (await user.checkPassword(password))) {
-    const { role, password, ...userData } = user.toObject(); // convert to plain object
+    const { role, password, refreshToken, ...userData } = user.toObject(); // convert to plain object
     const accessToken = generateToken(user._id, role);
-    const refreshToken = generateRefreshToken(user._id);
-    await User.findByIdAndUpdate(user._id, { refreshToken }, { new: true });
-    res.cookie("refreshToken", refreshToken, {
+    const newRefreshToken = generateRefreshToken(user._id);
+    await User.findByIdAndUpdate(
+      user._id,
+      { refreshToken: newRefreshToken },
+      { new: true }
+    );
+    res.cookie("refreshToken", newRefreshToken, {
       httpOnly: true,
       maxAge: 7 * 24 * 60 * 60 * 1000, // milliseconds of 7 days
     });
@@ -60,7 +64,7 @@ export const getCurrent = asyncHandler(async (req, res) => {
   const user = await User.findById(_id).select("-refreshToken -password -role");
   if (user) {
     return res.status(200).json({
-      success: true,
+      success: user ? true : false,
       result: user ? user : "User not found",
     });
   }
@@ -135,5 +139,49 @@ export const resetPassword = asyncHandler(async (req, res) => {
   return res.status(200).json({
     success: user ? true : false,
     message: user ? "Password changed successfully" : "Something went wrong",
+  });
+});
+
+export const getUsers = asyncHandler(async (req, res) => {
+  const response = await User.find().select("-refreshToken -password -role");
+  return res.status(200).json({
+    success: response ? true : false,
+    users: response,
+  });
+});
+
+export const deleteUser = asyncHandler(async (req, res) => {
+  const { _id } = req.query;
+  if (!_id) throw new Error("Missing inputs");
+  const response = await User.findByIdAndDelete(_id);
+  console.log(response);
+  return res.status(200).json({
+    success: response ? true : false,
+    message: response ? `${response.email} was deleted` : "No user to delete",
+  });
+});
+
+export const updateUser = asyncHandler(async (req, res) => {
+  const { _id } = req.user;
+  if (!_id || Object.keys(req.body).length === 0)
+    throw new Error("Missing inputs");
+  const response = await User.findByIdAndUpdate(_id, req.body, {
+    new: true,
+  }).select("-password -role -refreshToken");
+  return res.status(200).json({
+    success: response ? true : false,
+    updatedUser: response ? response : "Something went wrong",
+  });
+});
+
+export const updateUserByAdmin = asyncHandler(async (req, res) => {
+  const { uid } = req.params;
+  if (Object.keys(req.body).length === 0) throw new Error("Missing inputs");
+  const response = await User.findByIdAndUpdate(uid, req.body, {
+    new: true,
+  }).select("-password -role -refreshToken");
+  return res.status(200).json({
+    success: response ? true : false,
+    updatedUser: response ? response : "Something went wrong",
   });
 });
