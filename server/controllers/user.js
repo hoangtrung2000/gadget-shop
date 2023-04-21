@@ -154,7 +154,6 @@ export const deleteUser = asyncHandler(async (req, res) => {
   const { _id } = req.query;
   if (!_id) throw new Error("Missing inputs");
   const response = await User.findByIdAndDelete(_id);
-  console.log(response);
   return res.status(200).json({
     success: response ? true : false,
     message: response ? `${response.email} was deleted` : "No user to delete",
