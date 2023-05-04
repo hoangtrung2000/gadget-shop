@@ -141,3 +141,17 @@ export const deleteBlog = asyncHandler(async (req, res) => {
     result: response ? "Blog was deleted" : "Cannot deleted the blog",
   });
 });
+
+export const updateImageBlog = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  if (!req.file) throw new Error("Missing image");
+  const response = await Blog.findByIdAndUpdate(
+    id,
+    { images: req.file.path },
+    { new: true }
+  );
+  return res.status(200).json({
+    success: response ? true : false,
+    result: response ? response : "Something went wrong",
+  });
+});
