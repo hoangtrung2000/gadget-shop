@@ -10,7 +10,7 @@ var couponSchema = new mongoose.Schema(
       uppercase: true,
     },
     discount: {
-      type: Number,
+      type: String,
       required: true,
     },
     expiry: {
