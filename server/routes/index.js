@@ -7,6 +7,7 @@ import orderRouter from "./order.js";
 import productRouter from "./product.js";
 import productCategoryRouter from "./productCategory.js";
 import userRouter from "./user.js";
+import insertData from "./insertData.js";
 
 const initRouter = (app) => {
   app.use("/api/user", userRouter);
@@ -17,6 +18,7 @@ const initRouter = (app) => {
   app.use("/api/blogCategory", blogCategoryRouter);
   app.use("/api/coupon", couponRouter);
   app.use("/api/order", orderRouter);
+  app.use("/api/insert", insertData);
 
   app.use(notFound);
   app.use(errorHandler);
