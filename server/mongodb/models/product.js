@@ -55,6 +55,10 @@ var productSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    thumb: {
+      type: String,
+      require: true,
+    },
   },
   {
     timestamps: true,
