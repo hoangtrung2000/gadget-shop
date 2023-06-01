@@ -1,18 +1,21 @@
 import React from "react";
-import { Banner, Sidebar } from "../../components";
+import { Banner, BestSeller, Sidebar } from "../../components";
 
 const Home: React.FC = () => {
   return (
-    <div className="w-main flex">
-      <div className="flex flex-col gap-5 w-[25%] flex-auto">
-        <Sidebar />
-        <span>Deal Daily</span>
+    <>
+      <div className="flex w-main">
+        <div className="flex w-[25%] flex-auto flex-col gap-5">
+          <Sidebar />
+          <span>Deal Daily</span>
+        </div>
+        <div className="flex w-[75%] flex-auto flex-col gap-5 pl-5">
+          <Banner />
+          <BestSeller />
+        </div>
       </div>
-      <div className="flex flex-col gap-5 pl-5 w-[75%] flex-auto">
-        <Banner />
-        <span>Best Seller</span>
-      </div>
-    </div>
+      <div className="h-[500px] w-full"></div>
+    </>
   );
 };
 

@@ -53,7 +53,7 @@ export const getAllProducts = asyncHandler(async (req, res) => {
 
   // Pagination
   const page = +req.query.page || 1;
-  const limit = +req.query.limit || 2;
+  const limit = +req.query.limit || 10;
   const skip = (page - 1) * limit;
   queryCommand.skip(skip).limit(limit);
 
@@ -63,7 +63,7 @@ export const getAllProducts = asyncHandler(async (req, res) => {
     return res.status(200).json({
       success: response ? true : false,
       counts,
-      result: response ? response : "Cannot get any products.",
+      results: response ? response : "Cannot get any products.",
     });
   } catch (error) {
     throw new Error(error.message);

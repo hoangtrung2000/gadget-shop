@@ -3,10 +3,17 @@ import * as dotenv from "dotenv";
 import connectDB from "./mongodb/connect.js";
 import initRouter from "./routes/index.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
+app.use(
+  cors({
+    origin: process.env.URL_CLIENT,
+    methods: ["POST", "PUT", "GET", "DELETE"],
+  })
+);
 const port = process.env.PORT || 8080;
 
 app.use(cookieParser());
