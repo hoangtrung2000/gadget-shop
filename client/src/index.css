@@ -6,3 +6,34 @@
 body {
   font: 400 14px/1.45 Poppins;
 }
+
+button.slick-next {
+  right: 80px;
+  z-index: 10;
+}
+button.slick-prev {
+  left: 20px;
+  z-index: 10;
+}
+button.slick-next::before {
+  color: gray;
+  content: "\276F";
+  background-color: #ffd3d3;
+  width: 80px;
+  height: 80px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button.slick-prev::before {
+  color: gray;
+  content: "\276E";
+  background-color: #ffd3d3;
+  width: 80px;
+  height: 80px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
