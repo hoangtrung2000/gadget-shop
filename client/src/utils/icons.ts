@@ -1,9 +1,15 @@
-import { RiPhoneFill, RiArrowDropDownFill } from "react-icons/ri";
-import { GrMail } from "react-icons/gr";
+import {
+  AiFillStar,
+  AiOutlineMenu,
+  AiOutlineStar,
+  AiTwotoneHeart,
+} from "react-icons/ai";
+import { BsEyeFill, BsFillBagCheckFill } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
-import { BsFillBagCheckFill } from "react-icons/bs";
-import { TfiMenu } from "react-icons/tfi";
+import { GrMail } from "react-icons/gr";
+import { RiArrowDropDownFill, RiPhoneFill } from "react-icons/ri";
 import { SlScreenSmartphone } from "react-icons/sl";
+import { TfiMenu } from "react-icons/tfi";
 
 const icons = {
   RiPhoneFill,
@@ -13,6 +19,11 @@ const icons = {
   RiArrowDropDownFill,
   TfiMenu,
   SlScreenSmartphone,
+  AiFillStar,
+  AiOutlineStar,
+  AiTwotoneHeart,
+  AiOutlineMenu,
+  BsEyeFill,
 };
 
 export default icons;
