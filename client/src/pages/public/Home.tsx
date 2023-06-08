@@ -1,5 +1,5 @@
 import React from "react";
-import { Banner, BestSeller, Sidebar } from "../../components";
+import { Banner, BestSeller, DealDaily, Sidebar } from "../../components";
 
 const Home: React.FC = () => {
   return (
@@ -7,7 +7,7 @@ const Home: React.FC = () => {
       <div className="flex w-main">
         <div className="flex w-[25%] flex-auto flex-col gap-5">
           <Sidebar />
-          <span>Deal Daily</span>
+          <DealDaily />
         </div>
         <div className="flex w-[75%] flex-auto flex-col gap-5 pl-5">
           <Banner />

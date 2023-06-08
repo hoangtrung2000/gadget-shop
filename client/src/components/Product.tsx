@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { formatMoney } from "../utils/helper";
 import { Label } from "../assets";
+import { renderRatingStar } from "../utils/helper";
+import { SelectOption } from "../components";
+import icons from "../utils/icons";
 
 type ProductProps = {
   product: Product;
@@ -8,14 +11,33 @@ type ProductProps = {
 };
 
 const Product: React.FC<ProductProps> = ({ product, activeTab }) => {
+  const [isShowOptions, setIsShowOptions] = useState<boolean>(false);
+  const { AiTwotoneHeart, AiOutlineMenu, BsEyeFill } = icons;
   return (
     <div className="w-full px-[10px] text-base">
-      <div className="flex w-full flex-col items-center gap-[15px] border p-4">
+      <div
+        className="flex w-full flex-col items-center gap-[15px] border p-4"
+        onMouseEnter={(e) => {
+          e.stopPropagation();
+          setIsShowOptions(true);
+        }}
+        onMouseLeave={(e) => {
+          e.stopPropagation();
+          setIsShowOptions(false);
+        }}
+      >
         <div className="relative w-full">
+          {isShowOptions && (
+            <div className="absolute bottom-[-10px] left-0 right-0 flex animate-slide-top justify-center gap-2">
+              <SelectOption icon={<AiTwotoneHeart />} />
+              <SelectOption icon={<AiOutlineMenu />} />
+              <SelectOption icon={<BsEyeFill />} />
+            </div>
+          )}
           <img
             src={product?.thumb || ""}
             alt="thumbnail"
-            className="h-[243px] w-[243px] object-cover"
+            className="h-[274px] w-[274px] object-cover"
           />
           <img
             src={Label}
@@ -26,7 +48,10 @@ const Product: React.FC<ProductProps> = ({ product, activeTab }) => {
             {activeTab === 1 ? "HOT" : "NEW"}
           </span>
         </div>
-        <div className="flex w-full flex-col items-start gap-1">
+        <div className="mt-[15px] flex w-full flex-col items-start gap-1">
+          <span className="flex h-4">
+            {renderRatingStar(product?.totalRatings)}
+          </span>
           <span className="line-clamp-1">{product?.title}</span>
           <span>{`${formatMoney(product?.price)} VND`}</span>
         </div>

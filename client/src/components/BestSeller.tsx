@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import { Product, Skeleton } from ".";
 import { tabs } from "../assets/constant";
 import { useGetProduct } from "../hooks";
+import { MiniBanner1, MiniBanner2 } from "../assets";
 
 const styles = {
   container: `flex gap-8 pb-5 border-main border-b-2`,
@@ -60,6 +61,18 @@ const BestSeller: React.FC = () => {
             ))}
           </div>
         )}
+      </div>
+      <div className=" flex w-full gap-2 ">
+        <img
+          src={MiniBanner1}
+          alt="mini banner 1"
+          className="w-[43px] flex-1 object-contain"
+        />
+        <img
+          src={MiniBanner2}
+          alt="mini banner 2"
+          className="w-[43px] flex-1 object-contain"
+        />
       </div>
     </>
   );

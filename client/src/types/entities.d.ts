@@ -1,3 +1,8 @@
+interface Category {
+  id: string;
+  title: string;
+}
+
 interface Product {
   _id: string;
   title: string;
@@ -15,10 +20,4 @@ interface Product {
   createdAt: string;
   updatedAt: string;
   thumb: string;
-}
-
-interface ProductResponse {
-  success: boolean;
-  count: number;
-  results: Product[];
 }
