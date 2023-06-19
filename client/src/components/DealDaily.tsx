@@ -1,11 +1,14 @@
-import React, { memo } from "react";
-import icons from "../utils/icons";
+import React, { memo, useState } from "react";
+import { CountDown } from ".";
+import { unit } from "../assets/constant";
 import { useDealDaily } from "../hooks";
+import { formatMoney, renderRatingStar } from "../utils/helper";
+import icons from "../utils/icons";
 
 const DealDaily: React.FC = memo(() => {
-  const { dealDaily } = useDealDaily();
+  const { dealDaily, hours, seconds, minutes } = useDealDaily();
 
-  const { AiFillStar } = icons;
+  const { AiFillStar, AiOutlineMenu } = icons;
   return (
     <div className="w-full flex-auto border">
       <div className="flex w-full items-center justify-between p-4">
@@ -16,6 +19,32 @@ const DealDaily: React.FC = memo(() => {
           DEAL DAILY
         </span>
         <span className="flex-1"></span>
+      </div>
+      <div className="flex w-full flex-col items-center gap-2 px-4 pt-8">
+        <img
+          src={dealDaily?.thumb}
+          alt="thumbnail"
+          className="w-full object-contain"
+        />
+        <span className="line-clamp-1 text-center">{dealDaily?.title}</span>
+        <span className="flex h-4">
+          {renderRatingStar(dealDaily?.totalRatings, 20)}
+        </span>
+        <span>{`${formatMoney(dealDaily?.price)} VND`}</span>
+      </div>
+      <div className="mt-8 p-4">
+        <div className="mb-4 flex items-center justify-center gap-2">
+          <CountDown unit={unit.HOURS} number={hours} />
+          <CountDown unit={unit.MINUTES} number={minutes} />
+          <CountDown unit={unit.SECONDS} number={seconds} />
+        </div>
+        <button
+          type="button"
+          className="flex w-full items-center justify-center gap-2 bg-main py-2 font-medium text-white hover:bg-gray-800"
+        >
+          <AiOutlineMenu />
+          <span>Options</span>
+        </button>
       </div>
     </div>
   );
