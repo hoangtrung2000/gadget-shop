@@ -8,16 +8,24 @@ export const createSlug = (string: string): string =>
     .split(" ")
     .join("-");
 
-export const formatMoney = (number: number): string =>
-  Number(number.toFixed(1)).toLocaleString();
+export const formatMoney = (number: number | undefined): string =>
+  Number(number?.toFixed(1)).toLocaleString();
 
-export const renderRatingStar = (number: string | number) => {
+export const renderRatingStar = (
+  number: string | number | undefined,
+  size = 16
+) => {
   const { AiFillStar, AiOutlineStar } = icons;
   const stars = [];
+  if (!number) return;
   if (!Number(number)) return;
   for (let i = 0; i < +number; i++)
-    stars.push(<AiFillStar key={i} color="orange" />);
+    stars.push(
+      <AiFillStar size={size} key={`filled-star-${i}`} color="orange" />
+    );
   for (let i = 5; i > +number; i--)
-    stars.push(<AiOutlineStar key={i} color="orange" />);
+    stars.push(
+      <AiOutlineStar size={size} key={`empty-star-${i}`} color="orange" />
+    );
   return stars;
 };

@@ -1,9 +1,23 @@
-export { default as Banner } from "./Banner";
-export { default as Sidebar } from "./Sidebar";
-export { default as Header } from "./Header";
-export { default as Navigation } from "./Navigation";
-export { default as BestSeller } from "./BestSeller";
-export { default as Product } from "./Product";
-export { default as Skeleton } from "./Skeleton";
-export { default as SelectOption } from "./SelectOption";
-export { default as DealDaily } from "./DealDaily";
+import Banner from "./Banner";
+import Sidebar from "./Sidebar";
+import Header from "./Header";
+import Navigation from "./Navigation";
+import BestSeller from "./BestSeller";
+import Product from "./Product";
+import Skeleton from "./Skeleton";
+import SelectOption from "./SelectOption";
+import DealDaily from "./DealDaily";
+import CountDown from "./CountDown";
+
+export {
+  Banner,
+  Sidebar,
+  Header,
+  Navigation,
+  BestSeller,
+  Product,
+  Skeleton,
+  SelectOption,
+  DealDaily,
+  CountDown,
+};
