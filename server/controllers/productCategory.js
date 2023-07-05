@@ -10,7 +10,7 @@ export const createCategory = asyncHandler(async (req, res) => {
 });
 
 export const getAllCategory = asyncHandler(async (req, res) => {
-  const response = await productCategory.find().select("_id title");
+  const response = await productCategory.find();
   return res.status(200).json({
     success: response ? true : false,
     results: response ? response : "Not found any category",

@@ -8,6 +8,9 @@ import Skeleton from "./Skeleton";
 import SelectOption from "./SelectOption";
 import DealDaily from "./DealDaily";
 import CountDown from "./CountDown";
+import FeatureProducts from "./FeatureProducts";
+import ProductCard from "./ProductCard";
+import CustomSlider from "./CustomSlider";
 
 export {
   Banner,
@@ -20,4 +23,7 @@ export {
   SelectOption,
   DealDaily,
   CountDown,
+  FeatureProducts,
+  ProductCard,
+  CustomSlider,
 };

@@ -29,3 +29,11 @@ export const renderRatingStar = (
     );
   return stars;
 };
+
+export const secondToHms = (distance: number) => {
+  distance = distance / 1000; // convert d from miliseconds to second
+  const h = Math.floor(distance / 3600);
+  const m = Math.floor((distance % 3600) / 60);
+  const s = Math.floor((distance % 3600) % 60);
+  return { h, m, s };
+};

@@ -10,6 +10,7 @@ import { GrMail } from "react-icons/gr";
 import { RiArrowDropDownFill, RiPhoneFill } from "react-icons/ri";
 import { SlScreenSmartphone } from "react-icons/sl";
 import { TfiMenu } from "react-icons/tfi";
+import { IoIosArrowForward } from "react-icons/io";
 
 const icons = {
   RiPhoneFill,
@@ -24,6 +25,7 @@ const icons = {
   AiTwotoneHeart,
   AiOutlineMenu,
   BsEyeFill,
+  IoIosArrowForward,
 };
 
 export default icons;

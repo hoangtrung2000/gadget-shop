@@ -7,7 +7,7 @@ import icons from "../utils/icons";
 
 type ProductProps = {
   product: Product;
-  activeTab: number;
+  activeTab?: number;
 };
 
 const Product: React.FC<ProductProps> = ({ product, activeTab }) => {
