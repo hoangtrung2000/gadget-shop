@@ -1,6 +1,6 @@
-import React, { memo, useState } from "react";
+import React, { memo } from "react";
 import { CountDown } from ".";
-import { unit } from "../assets/constant";
+import { unit } from "../utils/constants";
 import { useDealDaily } from "../hooks";
 import { formatMoney, renderRatingStar } from "../utils/helper";
 import icons from "../utils/icons";
@@ -21,16 +21,22 @@ const DealDaily: React.FC = memo(() => {
         <span className="flex-1"></span>
       </div>
       <div className="flex w-full flex-col items-center gap-2 px-4 pt-8">
-        <img
-          src={dealDaily?.thumb}
-          alt="thumbnail"
-          className="w-full object-contain"
-        />
+        {dealDaily ? (
+          <img
+            src={dealDaily?.thumb}
+            alt="image"
+            className="w-full object-contain"
+          />
+        ) : (
+          "loading..."
+        )}
         <span className="line-clamp-1 text-center">{dealDaily?.title}</span>
         <span className="flex h-4">
           {renderRatingStar(dealDaily?.totalRatings, 20)}
         </span>
-        <span>{`${formatMoney(dealDaily?.price)} VND`}</span>
+        <span>
+          {dealDaily ? `${formatMoney(dealDaily?.price)} VND` : "0 VND"}
+        </span>
       </div>
       <div className="mt-8 p-4">
         <div className="mb-4 flex items-center justify-center gap-2">

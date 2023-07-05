@@ -1,5 +1,7 @@
+import moment from "moment";
 import { useEffect, useState } from "react";
 import { getProducts } from "../apis/app";
+import { secondToHms } from "../utils/helper";
 
 interface useDealDailyResult {
   dealDaily: Product | null;
@@ -18,14 +20,24 @@ const useDealDaily = (): useDealDailyResult => {
   const fetchDealDaily = async () => {
     const response = await getProducts({
       limit: 1,
-      page: Math.round(Math.random() * 10),
+      page: Math.round(Math.random() * 6),
       totalRatings: 5,
     });
     if (response.success) {
       setDealDaily(response.results[0]);
-      setHours(1);
-      setMinutes(2);
-      setSeconds(2);
+
+      // Call API at 5AM
+      const today = `${moment().format("MM/DD/YYYY")} 5:00:00`;
+      const nextDay = 24 * 3600 * 1000;
+      // distance between 5am today and 5am next day:
+      // 5AM today + 5AM in next day - the current time (milisecond)
+      const distance =
+        new Date(today).getTime() - new Date().getTime() + nextDay;
+
+      const time = secondToHms(distance);
+      setHours(time.h);
+      setMinutes(time.m);
+      setSeconds(time.s);
       setCountdownFinished(false);
     }
   };
@@ -43,12 +55,12 @@ const useDealDaily = (): useDealDailyResult => {
       } else {
         if (minutes > 0) {
           setMinutes((prevMinutes) => prevMinutes - 1);
-          setSeconds(2);
+          setSeconds(59);
         } else {
           if (hours > 0) {
             setHours((prevHours) => prevHours - 1);
-            setMinutes(2);
-            setSeconds(2);
+            setMinutes(59);
+            setSeconds(59);
           } else {
             setCountdownFinished(true);
           }

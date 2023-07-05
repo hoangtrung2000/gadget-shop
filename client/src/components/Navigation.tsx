@@ -1,18 +1,18 @@
 import React from "react";
-import { navigation } from "../utils/contants";
+import { navigation } from "../utils/constants";
 import { NavLink } from "react-router-dom";
 import icons from "../utils/icons";
 
 const Navigation: React.FC = () => {
   const { RiArrowDropDownFill } = icons;
   return (
-    <div className="w-main h-12 py-2 border-y mb-6 flex items-center gap-12">
+    <div className="mb-6 flex h-12 w-main items-center gap-12 border-y py-2">
       {navigation.map((nav) => (
         <NavLink
           to={nav.path}
           key={nav.id}
           className={({ isActive }) =>
-            `hover:text-main flex items-center  ${isActive ? " text-main" : ""}`
+            `flex items-center hover:text-main  ${isActive ? " text-main" : ""}`
           }
         >
           {nav.value}

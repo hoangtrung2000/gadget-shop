@@ -1,6 +1,8 @@
 interface Category {
-  id: string;
+  _id: string;
   title: string;
+  brand: string[];
+  image: string;
 }
 
 interface Product {
