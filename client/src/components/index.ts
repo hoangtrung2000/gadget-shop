@@ -1,29 +1,33 @@
 import Banner from "./Banner";
-import Sidebar from "./Sidebar";
+import BestSeller from "./BestSeller";
+import CountDown from "./CountDown";
+import CustomSlider from "./CustomSlider";
+import DealDaily from "./DealDaily";
+import FeatureProducts from "./FeatureProducts";
+import Footer from "./Footer";
 import Header from "./Header";
 import Navigation from "./Navigation";
-import BestSeller from "./BestSeller";
 import Product from "./Product";
-import Skeleton from "./Skeleton";
-import SelectOption from "./SelectOption";
-import DealDaily from "./DealDaily";
-import CountDown from "./CountDown";
-import FeatureProducts from "./FeatureProducts";
 import ProductCard from "./ProductCard";
-import CustomSlider from "./CustomSlider";
+import SelectOption from "./SelectOption";
+import Sidebar from "./Sidebar";
+import Skeleton from "./Skeleton";
+import TopHeader from "./TopHeader";
 
 export {
   Banner,
-  Sidebar,
+  BestSeller,
+  CountDown,
+  CustomSlider,
+  DealDaily,
+  FeatureProducts,
+  Footer,
   Header,
   Navigation,
-  BestSeller,
   Product,
-  Skeleton,
-  SelectOption,
-  DealDaily,
-  CountDown,
-  FeatureProducts,
   ProductCard,
-  CustomSlider,
+  SelectOption,
+  Sidebar,
+  Skeleton,
+  TopHeader,
 };

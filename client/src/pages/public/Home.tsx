@@ -58,7 +58,10 @@ const Home: React.FC = () => {
                   <h4 className="font-semibold uppercase">{category.title}</h4>
                   <ul className="text-sm">
                     {category.brand.map((item) => (
-                      <span className="flex items-center gap-1 text-gray-500">
+                      <span
+                        key={item}
+                        className="flex items-center gap-1 text-gray-500"
+                      >
                         <IoIosArrowForward />
                         <li>{item}</li>
                       </span>
@@ -75,7 +78,6 @@ const Home: React.FC = () => {
           BLOG POSTS
         </h3>
       </div>
-      <div className="h-[500px] w-full"></div>
     </>
   );
 };
