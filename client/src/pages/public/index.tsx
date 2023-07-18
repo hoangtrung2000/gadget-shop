@@ -1,4 +1,21 @@
-export { default as Home } from "./Home";
-export { default as Login } from "./Login";
-export { default as Public } from "./Public";
-export { default as NotFoundPage } from "./NotFoundPage";
+import Blogs from "./Blogs";
+import DetailProduct from "./DetailProduct";
+import Home from "./Home";
+import Login from "./Login";
+import NotFoundPage from "./NotFoundPage";
+import Products from "./Products";
+import Public from "./Public";
+import Services from "./Services";
+import FAQPage from "./FAQPage";
+
+export {
+  Blogs,
+  DetailProduct,
+  Home,
+  Login,
+  NotFoundPage,
+  Products,
+  Public,
+  Services,
+  FAQPage,
+};

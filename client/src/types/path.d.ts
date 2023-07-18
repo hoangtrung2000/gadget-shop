@@ -7,4 +7,6 @@ interface Path {
   BLOGS: string;
   OUR_SERVICES: string;
   FQA: string;
+  DETAIL_PRODUCT: string;
+  DETAIL_PRODUCT__ID__TITLE: string;
 }

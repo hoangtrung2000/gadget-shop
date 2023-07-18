@@ -1,16 +1,18 @@
 import React from "react";
-import { Header, Navigation } from "../../components";
+import { Footer, Header, Navigation, TopHeader } from "../../components";
 
 import { Outlet } from "react-router";
 
 const Public: React.FC = () => {
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="flex w-full flex-col items-center">
+      <TopHeader />
       <Header />
       <Navigation />
       <div className="w-main">
         <Outlet />
       </div>
+      <Footer />
     </div>
   );
 };

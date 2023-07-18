@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { formatMoney } from "../utils/helper";
+import { Link } from "react-router-dom";
 import { Label } from "../assets";
-import { renderRatingStar } from "../utils/helper";
 import { SelectOption } from "../components";
+import { formatMoney, renderRatingStar } from "../utils/helper";
 import icons from "../utils/icons";
-
+import path from "../utils/path";
 type ProductProps = {
   product: Product;
   activeTab?: number;
@@ -15,7 +15,8 @@ const Product: React.FC<ProductProps> = ({ product, activeTab }) => {
   const { AiTwotoneHeart, AiOutlineMenu, BsEyeFill } = icons;
   return (
     <div className="w-full px-[10px] text-base">
-      <div
+      <Link
+        to={`${path.DETAIL_PRODUCT}/${product._id}/${product.title}`}
         className="flex w-full flex-col items-center gap-[15px] border p-4"
         onMouseEnter={(e) => {
           e.stopPropagation();
@@ -55,7 +56,7 @@ const Product: React.FC<ProductProps> = ({ product, activeTab }) => {
           <span className="line-clamp-1">{product?.title}</span>
           <span>{`${formatMoney(product?.price)} VND`}</span>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };
